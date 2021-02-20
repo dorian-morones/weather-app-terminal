@@ -35,7 +35,7 @@ const readInput = async (message) => {
     const question = [
         {
             type: 'input',
-            name: 'desc',
+            name: 'city',
             message: message,
             valdiate(value) {
                 if (value.length === 0) {
@@ -46,8 +46,8 @@ const readInput = async (message) => {
         }
     ]
 
-    const { desc } = await inquirer.prompt(question);
-    return desc;
+    const { city } = await inquirer.prompt(question);
+    return city;
 
 };
 
@@ -62,13 +62,13 @@ const pause = async () => {
     await inquirer.prompt(question)
 }
 
-const listTaskToDelete = async (tasks) => {
+const listCities = async (data) => {
 
-    const choices = tasks.map((item, index) => {
+    const choices = data.map((item, index) => {
         const idx = `${index + 1}`.green
         return {
             value: item.id,
-            name: `${idx} ${item.desc}`
+            name: `${idx} ${item.name}`
         }
     })
     choices.unshift({
@@ -80,7 +80,7 @@ const listTaskToDelete = async (tasks) => {
         {
             type: 'list',
             name: 'id',
-            message: 'delete',
+            message: 'Select a city',
             choices: choices
 
         }
@@ -105,11 +105,11 @@ const confirm = async (message) => {
 const listTaskToUpdate = async (tasks) => {
 
     const choices = tasks.map((item, index) => {
+    console.log("🚀 ~ file: inquirer.js ~ line 108 ~ choices ~ item", item)
         const idx = `${index + 1}`.green
         return {
             value: item.id,
-            name: `${idx} ${item.desc}`,
-            checked: item.completed_at ? true : false
+            name: `${idx} ${item}`,
         }
     })
 
@@ -130,7 +130,7 @@ module.exports = {
     inquirerMenu,
     pause,
     readInput,
-    listTaskToDelete,
+    listCities,
     confirm,
     listTaskToUpdate
 }

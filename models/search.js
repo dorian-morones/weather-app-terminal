@@ -25,12 +25,13 @@ class Search {
             params: this.MapboxParams
         });
 
-        
-
         try {
             const resp = await http.get();
-            console.log("🚀 ~ file: search.js ~ line 32 ~ Search ~ city ~ resp", resp.data)
-            return [];
+            return resp.data.features.map( item => ({
+                id: item.id,
+                name: item.place_name,
+                position: item.center
+            }));
 
         } catch (e) {
             console.error(e);
