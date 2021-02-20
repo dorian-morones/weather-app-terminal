@@ -24,6 +24,7 @@ const main = async () => {
                 // Select a result item - city
                 const selectedId = await listCities(result);
                 const selectedCity = result.find( item => item.id === selectedId)
+                search.addToRecord(selectedCity.name);
                 const weather = await search.cityWeather(selectedCity.lat, selectedCity.lon)
 
                 //Show data
@@ -39,7 +40,10 @@ const main = async () => {
 
                 break;
             case 2:
-
+                search.capitalizeRecord.forEach( (lugar, i) =>  {
+                    const idx = `${ i + 1 }.`.green;
+                    console.log( `${ idx } ${ lugar } ` );
+                })
                 break;
             case 0:
 

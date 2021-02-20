@@ -1,12 +1,24 @@
+const fs = require('fs');
 const axios = require('axios');
 
 class Search {
 
     record = [];
-
+    dbPath = './db/database.json';
 
     constructor() {
-        //TODO = READ FROM DB
+        this.readDB();
+    }
+
+    get capitalizeRecord() {
+        return this.record.map( item => {
+
+            let word = item.split(' ');
+            word = word.map( w => w[0].toUpperCase() + w.substring(1) );
+
+            return word.join(' ')
+
+        })
     }
 
     get MapboxParams() {
@@ -64,6 +76,34 @@ class Search {
         } catch(e){
             console.error('ERROR', e)
         }
+    }
+
+    addToRecord(place) {
+        if( this.record.includes( place.toLocaleLowerCase() ) ){
+            return;
+        }
+        this.record = this.record.splice(0,5);
+
+        this.record.unshift( place.toLocaleLowerCase() );
+
+        // Save in db/file
+        this.saveDB();
+    }
+
+    saveDB() {
+        const payload = {
+            record: this.record
+        };
+        fs.writeFileSync( this.dbPath, JSON.stringify( payload ) );
+    }
+
+    readDB() {
+        if( !fs.existsSync( this.dbPath ) ) return;
+        
+        const info = fs.readFileSync( this.dbPath, { encoding: 'utf-8' });
+        const data = JSON.parse( info );
+
+        this.record = data.record;
     }
 
 }
