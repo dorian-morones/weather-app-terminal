@@ -17,9 +17,14 @@ class Search {
         }
     }
 
-    async city(place) {
-        console.log("🚀 ~ file: search.js ~ line 11 ~ Search ~ city ~ place", place);
+    get OWParams() {
+        return {
+            'appid': process.env.OW_KEY,
+            'units': 'metric',
+        }
+    }
 
+    async city(place) {
         const http = axios.create({
             baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${place}.json?`,
             params: this.MapboxParams
@@ -30,7 +35,8 @@ class Search {
             return resp.data.features.map( item => ({
                 id: item.id,
                 name: item.place_name,
-                position: item.center
+                lat: item.center[1],
+                lon: item.center[0],
             }));
 
         } catch (e) {
@@ -38,6 +44,27 @@ class Search {
         }
     }
 
+    async cityWeather(lat, lon){
+
+        const http = axios.create({
+            baseURL: 'http://api.openweathermap.org/data/2.5/weather?',
+            params: { ...this.OWParams, lat, lon }
+        });
+
+        try{
+            const resp = await http.get();
+            const { weather, main } = resp.data;
+            
+            return {
+                desc: weather[0].description,
+                min: main.temp_min,
+                max: main.temp_max,
+                temp: main.temp
+            }
+        } catch(e){
+            console.error('ERROR', e)
+        }
+    }
 
 }
 

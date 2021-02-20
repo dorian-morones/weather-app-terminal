@@ -23,17 +23,19 @@ const main = async () => {
 
                 // Select a result item - city
                 const selectedId = await listCities(result);
-                console.log("🚀 ~ file: app.js ~ line 26 ~ main ~ selectedId", selectedId)
                 const selectedCity = result.find( item => item.id === selectedId)
+                const weather = await search.cityWeather(selectedCity.lat, selectedCity.lon)
 
                 //Show data
+                console.clear();
                 console.log('\n======INFO======'.magenta);
                 console.log('City Name:', selectedCity.name);
-                console.log('Lat:', selectedCity.position[0]);
-                console.log('Lng:', selectedCity.position[1]);
-                console.log('Weather:',);
-                console.log('Min:',);
-                console.log('Max:',);
+                console.log('Lat:', selectedCity.lat);
+                console.log('Lng:', selectedCity.lon);
+                console.log('Weather:', weather.temp);
+                console.log('Min:', weather.min);
+                console.log('Max:', weather.max);
+                console.log('Current status:', weather.desc)
 
                 break;
             case 2:
