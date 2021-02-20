@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/dorian-morones/weather-app-terminal#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
     "inquirer": "^7.3.3"
   }
 }
