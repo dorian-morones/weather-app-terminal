@@ -7,6 +7,11 @@ Terminal application to check the weather of some city and save your search hist
     npm start
 ```
 
+#### Search a city
 ![Search a city](https://github.com/dorian-morones/weather-app-terminal/blob/main/static/search_city.png?raw=true)
+
+#### City weather
 ![City weather](https://github.com/dorian-morones/weather-app-terminal/blob/main/static/selected_city.png?raw=true)
+
+#### Search history
 ![Search history](https://github.com/dorian-morones/weather-app-terminal/blob/main/static/record.png?raw=true)
