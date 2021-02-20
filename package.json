@@ -1,0 +1,25 @@
+{
+  "name": "weather-app-terminal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dorian-morones/weather-app-terminal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dorian-morones/weather-app-terminal/issues"
+  },
+  "homepage": "https://github.com/dorian-morones/weather-app-terminal#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^7.3.3"
+  }
+}
